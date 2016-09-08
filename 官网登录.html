@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<style>
+    *{margin:0;
+      padding:0;
+    }
+    html,body{overflow:hidden;}
+    .box{
+        width:300px;
+        height:300px;
+        background:#ccc;
+        overflow:hidden;
+        border:1px solid #000;
+        border-radius:10px;
+        margin:100px auto;
+        -webkit-transform:scale(5,5);
+        opacity:0;
+        display:none;
+    }
+</style>
+<script>
+    window.onload = function(){
+        var oBtn = document.getElementById('btn');
+        var oBox = document.getElementById('box');
+        var oBtn2 = document.getElementById('btn2');
+
+        oBtn.onclick = function(){
+            oBox.style.display = 'block';
+            oBox.style.WebkitTransition = '.3s all ease';
+           // oBox.style.WebkitTransition = '.3s all ease';
+            setTimeout(function(){
+            oBox.style.opacity = 1;
+            oBox.style.WebkitTransform = 'scale(1,1)';
+
+            },0)
+        };
+        oBtn2.onclick = function(){
+            oBox.style.WebkitTransform = 'scale(5,5)';
+            oBox.style.opacity = 0;
+
+            function tranEnd(){
+                 oBox.removeEventListener('transitionend',tranEnd,false);
+                 oBox.style.display='none'
+            }
+
+            oBox.addEventListener('transitionend',tranEnd,false)
+        }
+
+    };
+</script>
+<body>
+    <a href="javascript:;" id="btn">登陆</a>
+    <div class="box" id="box">
+        <a href="javascript:;" id="btn2">取消</a>
+    </div>
+</body>
+</html>

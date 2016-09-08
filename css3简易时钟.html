@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Examples</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<style>
+.box{
+	width:300px;
+	height:300px;
+	border-radius:50%;
+	border:5px solid #000;
+	margin:100px auto;
+	position:relative;
+}
+.hou{
+	width:10px;
+	height:80px;
+	background:#C36;
+	border-radius:50% 50% 0 0;
+	position:absolute;
+	left:50%;
+	top:70px;
+	margin-left:-5px;
+	-webkit-transform-origin:bottom;
+	}
+.min{
+	width:8px;
+	height:100px;
+	background:#0CC;
+	border-radius:50% 50% 0 0;
+	position:absolute;
+	left:50%;
+	top:50px;
+	margin-left:-4px;
+	-webkit-transform-origin:bottom;
+	}
+.sec{
+	width:4px;
+	height:120px;
+	background:#30F;
+	border-radius:50% 50% 0 0;
+	position:absolute;
+	left:50%;
+	top:30px;
+	margin-left:-2px;
+	-webkit-transform-origin:bottom;
+	}
+.box span{
+		  width:4px;
+		  height:10px;
+		  position:absolute;
+		  left:50%;
+		  top:0px;
+		  background:red;
+		  margin-left:-2px;
+		  -webkit-transform-origin:center 150px;
+	}
+.box span.on{width:6px; height:14px;margin-left:-3px; background:green;}
+.on em{ position:absolute; top:18px; left:50%; font-style:normal; width:30px; 
+            margin-left:-15px; text-align:center; }   
+.box .cap{ position:absolute; width:20px; height:20px; left:50%; top:50%; margin-left:-10px;
+              margin-top:-10px; background: -webkit-radial-gradient(#fff, #000); border-radius:50%;}
+
+</style>
+<script>
+  window.onload = function(){
+	    var oBox = document.querySelector('.box');
+		var oHou = document.querySelector('.hou');
+		var oMin = document.querySelector('.min');
+		var oSec = document.querySelector('.sec');
+		
+		
+		var N = 60;
+		for(var i=0;i<N;i++){
+			var oSpan = document.createElement('span');
+			oSpan.style.WebkitTransform = 'rotate('+i*6+'deg)';
+			
+			if(i%5==0){
+		    oSpan.className = 'on';
+		//oSpan.claaName = 'on'
+			oSpan.innerHTML = '<em>'+(i/5||12)+'<\/em>';
+			var oEm = oSpan.children[0];
+			oEm.style.WebkitTransforn = 'rotate('+-i*6+'deg)';
+			}
+			oBox.appendChild(oSpan);
+		}
+		function time(){
+			var oDate = new Date;
+			var h = oDate.getHours();
+			var m = oDate.getMinutes();
+			var s = oDate.getSeconds();
+			var ms = oDate.getMilliseconds();//一小时等于30度，加上一分钟的距离成30；
+			oHou.style.WebkitTransform = 'rotate('+(h*30+m/60*30)+'deg)';
+			oMin.style.WebkitTransform = 'rotate('+(m*6+s/60*6)+'deg)';
+			oSec.style.WebkitTransform = 'rotate('+(s*6+ms/1000*6)+'deg)';
+			
+			};
+			 time()
+			setInterval(time,1)
+			
+	
+	  };
+</script>
+<body>
+   <div class="box">
+		<div class="hou"></div>
+		<div class="min"></div>
+		<div class="sec"></div>
+		<div class="cap"></div>
+   </div>
+</body>
+</html>
